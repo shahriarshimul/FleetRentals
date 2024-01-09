@@ -1,10 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ReportController;
@@ -15,6 +18,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\frontend\HomeController as FrontendHomeController;
 
@@ -58,6 +62,17 @@ Route::get('/categoryWise/{id}', [CategoryController::class, 'CatWise'])->name('
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::get('/driver-login', [AuthController::class, 'DriverLogin'])->name('DriverLogin');
 Route::post('/store', [AuthController::class, 'store'])->name('store');
+
+
+// forgotten password
+
+Route::get('/forgot-password', [PasswordResetController::class, 'showLinkRequestForm'])->middleware('guest')->name('password.request');
+Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail'])->middleware('guest')->name('password.email');
+
+// reset password
+
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetPasswordForm'])->name('password.reset');
+Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
 
 //Register
 Route::get('/registration', [RegistrationController::class, 'index'])->name('registration');
