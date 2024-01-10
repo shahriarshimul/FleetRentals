@@ -44,7 +44,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credential)) {
             if (auth()->user()->role == 'customer') {
-                return redirect()->route('home');
+                return redirect()->route('profile');
             } elseif (auth()->user()->role == 'admin' || auth()->user()->role == 'driver') {
                 return redirect()->route('app')->withSuccess('Login Success');
             }
@@ -55,7 +55,7 @@ class AuthController extends Controller
 
 
 
-    
+
     public function SpecificBookings(){
         $user_email = (auth()->user()->email);
         $userBooking = DB::table('books')->where('assigned_driver_mail', $user_email)->orderBy('id', 'desc')->get();

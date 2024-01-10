@@ -333,7 +333,6 @@
                     </li>
 
 
-
                     <li class="nav-item ">
                         <a class="nav-link" href="{{ route('order.report') }}" data-bs-auto-close="false"
                             role="button" aria-expanded="false">

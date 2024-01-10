@@ -17,6 +17,7 @@
         {{-- Sidebar --}}
         @include('backend.components.fixed.sidebar')
 
+
         <div class="page-wrapper">
 
         {{-- Header --}}

@@ -74,6 +74,7 @@ Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkE
 Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetPasswordForm'])->name('password.reset');
 Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
 
+
 //Register
 Route::get('/registration', [RegistrationController::class, 'index'])->name('registration');
 
@@ -97,6 +98,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'admin'], function () {
         //Pages
         Route::get('/app', [HomeController::class, 'index'])->name('app');
+
 
         //ProductController
         Route::get('/product-list', [ProductController::class, 'list'])->name('product.list');
